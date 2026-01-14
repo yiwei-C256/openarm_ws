@@ -1,0 +1,16 @@
+<mujoco model="banana">
+    <!-- <compiler angle="degree" meshdir="./meshes/011_banana" texturedir="./meshes/011_banana"/> -->
+    <asset>
+        <texture name="tex_banana" type="2d" file="meshes/011_banana/texture_map.png"/>
+        <material name="mat_banana" texture="tex_banana" specular="0.5" shininess="0.5"/>
+        <mesh name="mesh_banana_visual" file="meshes/011_banana/textured_simple.obj"/>
+        <mesh name="mesh_banana_collision" file="meshes/011_banana/textured_simple.obj"/>
+    </asset>
+
+    <!-- 注意：这里去掉了 <worldbody>，直接写 body 内容 -->
+    <body name="banana">
+        <freejoint name="banana_joint"/>
+        <geom type="mesh" mesh="mesh_banana_visual" material="mat_banana" contype="0" conaffinity="0" group="1"/>
+        <geom type="mesh" mesh="mesh_banana_collision" mass="0.12" friction="1 0.005 0.0001" group="3" rgba="1 1 1 0"/>
+    </body>
+</mujoco>

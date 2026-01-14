@@ -1,0 +1,48 @@
+<mujoco model="openarm_bimanual scene">
+  <include file="openarm_bimanual_cam_v2.xml"/>
+  <!-- <include file="openarm_bimanual.xml"/> -->
+  <!-- 修正点：去掉 "..."，明确指定重力和求解参数 -->
+  <!-- timestep="0.002" 表示 2ms 一个步长，比默认的 1ms 快一倍 -->
+  <!-- iterations="50" 限制求解器迭代次数，防止计算死锁，提高速度 -->
+   
+
+  <statistic center="0 0 0.43" extent=".85" meansize="0.05"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="160" elevation="-10"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    <texture name="tex_banana" type="2d" file="meshes/011_banana/texture_map.png"/>
+    <material name="mat_banana" texture="tex_banana" specular="0.5" shininess="0.5"/>
+    <mesh name="mesh_banana_visual" file="011_banana/textured_simple.obj"/>
+    <mesh name="mesh_banana_collision" file="011_banana/textured_simple.obj"/>
+
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+    <!-- 添加桌子 -->
+    <body name="table" pos="0.35 0 0.15">
+        <!-- 桌面：横向放置，尺寸为0.8x1.2米（x方向0.4，y方向0.6） -->
+        <geom name="table_top" type="box" size="0.25 0.3 0.15" pos="0 0 0" rgba="0.8 0.8 0.8 1"/>
+    </body>
+
+    <body name="banana" pos="0.35 0 0.2">
+      <freejoint name="banana_joint"/>
+      <!-- 视觉模型 -->
+      <geom type="mesh" mesh="mesh_banana_visual" material="mat_banana" contype="0" conaffinity="0" group="1"/>
+      <!-- 碰撞模型 -->
+      <geom type="mesh" mesh="mesh_banana_collision" mass="0.12" friction="1 0.005 0.0001" group="3" rgba="1 1 1 0"/>
+    </body>
+  </worldbody>
+</mujoco>

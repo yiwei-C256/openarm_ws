@@ -1,0 +1,9 @@
+Looking in indexes: https://download.pytorch.org/whl/cpu
+Requirement already satisfied: torch in /home/ldp/.local/lib/python3.10/site-packages (2.5.1+cpu)
+Requirement already satisfied: filelock in /home/ldp/.local/lib/python3.10/site-packages (from torch) (3.16.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/ldp/.local/lib/python3.10/site-packages (from torch) (4.15.0)
+Requirement already satisfied: networkx in /home/ldp/.local/lib/python3.10/site-packages (from torch) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/lib/python3/dist-packages (from torch) (3.0.3)
+Requirement already satisfied: fsspec in /home/ldp/.local/lib/python3.10/site-packages (from torch) (2024.12.0)
+Requirement already satisfied: sympy==1.13.1 in /home/ldp/.local/lib/python3.10/site-packages (from torch) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/ldp/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch) (1.3.0)
